@@ -81,6 +81,5 @@ Thumbs.db
 
 *.txt
 
-# db
-init.sql
-**/init.sql
+# DB init (only this project path)
+db/
