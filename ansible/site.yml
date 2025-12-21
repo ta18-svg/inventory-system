@@ -1,0 +1,25 @@
+- name: Setup inventory system application server
+  #「どのホストに対してこのプレイを実行するか」を指定する
+  # inventory.ini の中で定義したグループ名と対応
+  hosts: web
+  # sudo で権限昇格して実行（root 権限が必要なタスクがあるため）
+  become: true
+
+  vars:
+    # アプリケーション用の Linux ユーザー名（ファイル所有者などに使う想定）
+    app_user: "appuser"
+    # Azure VM 上にアプリを配置するhホームディレクトリ
+    #変数の宣言
+    app_base_dir: /opt/inventory-system
+    # デプロイ先で使用する JAR ファイルのファイル名
+    jar_file_name: "app.jar"
+    # コントロールノード側に存在するビルド済み JAR のパス
+    # 例：ローカルで mvn package した成果物の場所
+    jar_local_path: "app.jar"
+    # コントロールノード側にある Dockerfile のパス
+    # これをリモートホストに転送して docker build する想定
+    dockerfile_local_path: "Dockerfile"
+   
+  roles:
+    - common
+    - app_compose

@@ -1,0 +1,13 @@
+# terraform.tfvars （Azure CLI 認証版）
+
+# 必要なら location を上書き
+location = ""
+
+# リソース名の prefix
+project_name = ""
+
+# VM の管理ユーザー名
+admin_username = ""
+
+# 公開鍵 (~/.ssh/id_rsa.pub の中身を 1 行で)
+admin_ssh_public_key = ""
