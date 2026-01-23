@@ -31,7 +31,7 @@
             <td th:text="${p.id}"></td>
             <td th:text="${p.name}"></td>
             <td th:text="${p.category}"></td>
-            <td th:text="${p.price}"></td>
+            <td th:text="${#numbers.formatInteger(p.price, 0, 'COMMA')}"></td>
             <td th:text="${p.stock}"></td>
             <td>
                 <a th:href="@{'/products/' + ${p.id} + '/edit'}" class="btn small">編集</a>

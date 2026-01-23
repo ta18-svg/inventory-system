@@ -2,47 +2,38 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
 <head>
     <meta charset="UTF-8">
+    <!-- title があれば表示、無ければ '商品フォーム' -->
     <title th:text="${title} ?: '商品フォーム'"></title>
+
+    <!-- CSS 読み込み -->
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <div class="container">
+
+    <!-- 画面タイトル -->
     <h1 th:text="${title} ?: '商品フォーム'"></h1>
 
+    <!-- =======================
+         新規登録（product.id が null のとき）
+         ======================= -->
     <form th:if="${product.id == null}"
-          method="post" action="/products">
-        <div th:replace="this ::product-fields"></div>
+          method="post"
+          th:action="@{/products}">
+        <!-- 入力欄（共通部品）を外部ファイルから読み込む -->
+        <div th:replace="products/form_fields :: product-fields"></div>
     </form>
 
+    <!-- =======================
+         編集（product.id が null でないとき）
+         ======================= -->
     <form th:if="${product.id != null}"
-          th:action="@{'/products/' + ${product.id}}" method="post">
-        <div th:replace="this ::product-fields"></div>
+          method="post"
+          th:action="@{'/products/' + ${product.id}}">
+        <!-- 入力欄（共通部品）を外部ファイルから読み込む -->
+        <div th:replace="products/form_fields :: product-fields"></div>
     </form>
 
-    <div th:fragment="product-fields">
-        <div class="form-row">
-            <label>商品名</label>
-            <input type="text" name="name" th:value="${product.name}" required>
-        </div>
-        <div class="form-row">
-            <label>カテゴリ</label>
-            <input type="text" name="category" th:value="${product.category}" required>
-        </div>
-        <div class="form-row">
-            <label>価格</label>
-            <input type="number" step="0.01" name="price"
-                   th:value="${product.price}" required>
-        </div>
-        <div class="form-row">
-            <label>在庫数</label>
-            <input type="number" name="stock"
-                   th:value="${product.stock}" required>
-        </div>
-
-        <button type="submit" class="btn">保存</button>
-        <a href="/dashboard" class="btn secondary">戻る</a>
-    </div>
 </div>
 </body>
 </html>
-
