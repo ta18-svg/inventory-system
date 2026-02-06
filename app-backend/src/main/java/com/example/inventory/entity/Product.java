@@ -1,42 +1,36 @@
 package com.example.inventory.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.AccessLevel;
+
 import java.math.BigDecimal;
 
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "products")
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 一意のID自動採番
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; // setter無し
 
+    @Setter
     @Column(nullable = false)
-    private String name;         // 商品名
+    private String name;
 
+    @Setter
     @Column(nullable = false)
-    private String category;     // カテゴリ
+    private String category;
 
+    @Setter
     @Column(nullable = false)
-    private BigDecimal price;    // 価格
+    private BigDecimal price;
 
+    @Setter
     @Column(nullable = false)
-    private Integer stock;       // 在庫数
-
-    public Product() {}
-
-    // getter/setter
-    public Long getId() { return id; }
-
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-
-    public String getCategory() { return category; }
-    public void setCategory(String category) { this.category = category; }
-
-    public BigDecimal getPrice() { return price; }
-    public void setPrice(BigDecimal price) { this.price = price; }
-
-    public Integer getStock() { return stock; }
-    public void setStock(Integer stock) { this.stock = stock; }
+    private Integer stock;
 }
